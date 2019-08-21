@@ -12,5 +12,6 @@ namespace F1News.Data
             : base(options)
         {
         }
+        
     }
 }
