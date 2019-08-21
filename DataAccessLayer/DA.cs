@@ -34,12 +34,12 @@ namespace F1News.DataAccessLayer
             using (SqlConnection conn = GetConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(@"select
-                                                            event_id
-                                                            ,title
-                                                            ,[description]
-                                                            ,event_start
-                                                            ,event_end
-                                                            ,all_day
+                                                            eventID
+                                                            ,Subject
+                                                            ,[Description]
+                                                            ,Start
+                                                            ,End
+                                                            ,IsFullday
                                                         from
                                                             [Events]
                                                         where
@@ -57,12 +57,12 @@ namespace F1News.DataAccessLayer
                         {
                             events.Add(new Events()
                             {
-                                eventID = Convert.ToInt32(dr["event_id"]),
-                                Subject = Convert.ToString(dr["title"]),
-                                Description = Convert.ToString(dr["description"]),
-                                Start = Convert.ToString(dr["event_start"]),
-                                End = Convert.ToString(dr["event_end"]),
-                                IsFullDay = Convert.ToBoolean(dr["all_day"])
+                                eventID = Convert.ToInt32(dr["eventID"]),
+                                Subject = Convert.ToString(dr["Subject"]),
+                                Description = Convert.ToString(dr["Description"]),
+                                Start = Convert.ToString(dr["Start"]),
+                                End = Convert.ToString(dr["End"]),
+                                IsFullDay = Convert.ToBoolean(dr["IsFullDay"])
                             });
                         }
                     }
