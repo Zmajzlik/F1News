@@ -11,7 +11,7 @@ namespace F1News.Controllers
 {
     public class HomeController : Controller
     {
-       
+
         public IActionResult Index()
         {
             return View();
@@ -39,7 +39,32 @@ namespace F1News.Controllers
         {
             return View();
         }
-       
+        public IActionResult Biography()
+        {
+            return View();
+        }
+        public IActionResult FormulaOne()
+        {
+            return View();
+        }
+        public IActionResult Series()
+        {
+            return View();
+        }
+        public IActionResult Watch()
+        {
+            return View();
+        }
+
+        public IActionResult Play()
+        {
+            return View();
+        }
+        public IActionResult MemeSection()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -76,13 +76,13 @@
             <button class="navbar-toggler hidden-lg-up " type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation"> &#9776; </button>
             <div class="collapse navbar-toggleable-md" id="exCollapsingNavbar2">
                 <ul class="nav navbar-nav ">
-                    <li class="nav-item active"> <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Robert Kubica</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Formula 1</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Inne serie</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Ogladaj</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Graj</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Sekcja memow</a> </li>
+                    <li class="nav-item active"> <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Biography" asp-controller="Home">Robert Kubica</a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="FormulaOne" asp-controller="Home">Formula 1</a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Series" asp-controller="Home">Inne serie</a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Watch" asp-controller="Home">Ogladaj</a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Play" asp-controller="Home">Graj</a> </li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="MemeSection" asp-controller="Home">Sekcja memow</a> </li>
                     <li class="nav-item"> <a class="nav-link" asp-action="Calendar" asp-controller="Home">Kalendarz motorsportu</a> </li>
                 </ul>
                 <form class="pull-xs-right">
