@@ -5,19 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using F1News.Models;
-using F1News.DataAccessLayer;
 using Microsoft.Extensions.Options;
 
 namespace F1News.Controllers
 {
     public class HomeController : Controller
     {
-        private DA _DA { get; set; }
-
-        public HomeController(IOptions<AppSettings> settings)
-        {
-            _DA = new DA(settings.Value.ConnectionStr);
-        }
+       
         public IActionResult Index()
         {
             return View();
@@ -45,12 +39,7 @@ namespace F1News.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult GetCalendarEvents(string start, string end)
-        {
-            List<Events> events = _DA.GetCalendarEvents(start, end);
-            return Json(events);
-        }
+       
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
