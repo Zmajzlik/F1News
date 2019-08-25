@@ -39,7 +39,7 @@ namespace F1News
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddSingleton(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
