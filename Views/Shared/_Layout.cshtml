@@ -36,7 +36,7 @@
                     <div class="col-md-6 col-lg-4">
                         <a asp-action="Index" asp-controller="Home">
                             <h1>F1 News<small>Get the latest News</small></h1>
-                        </a> 
+                        </a>
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -58,10 +58,20 @@
                     }
                     else
                     {
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-                            <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-                        </ul>
+                        <div class="col-md-6 col-lg-5 offset-lg-3 admin-bar hidden-sm-down">
+                            <nav class="nav-inline">
+                                <ul>
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class=" fa fa-user"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                            
                     }
 
                 </div>
@@ -80,19 +90,47 @@
                 <ul class="nav navbar-nav ">
                     <li class="nav-item active"> <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a> </li>
                     <li class="nav-item"> <a class="nav-link" asp-action="Biography" asp-controller="Home">Robert Kubica</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="FormulaOne" asp-controller="Home">Formula 1</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="Series" asp-controller="Home">Inne serie</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="Watch" asp-controller="Home">Ogladaj</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="Play" asp-controller="Home">Graj</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="MemeSection" asp-controller="Home">Sekcja memow</a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="Calendar" asp-controller="Home">Kalendarz motorsportu</a> </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Formula 1</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">F1 2019</a>
+                            <a class="dropdown-item" href="#">FANTASY F1</a>
+                            <a class="dropdown-item" href="#">GP Predictor</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Inne Serie</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">F1 2019</a>
+                            <a class="dropdown-item" href="#">FANTASY F1</a>
+                            <a class="dropdown-item" href="#">GP Predictor</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Ogladaj</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">F1 2019</a>
+                            <a class="dropdown-item" href="#">FANTASY F1</a>
+                            <a class="dropdown-item" href="#">GP Predictor</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Graj</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">F1 2019</a>
+                            <a class="dropdown-item" href="#">FANTASY F1</a>
+                            <a class="dropdown-item" href="#">GP Predictor</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Galeria</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Wasze zdjecia</a>
+                            <a class="dropdown-item" href="#">Sekcja memow</a>
+                        </div>
+                    </li>
                 </ul>
-                <form class="pull-xs-right">
-                    <div class="search">
-                        <input type="text" class="form-control" maxlength="64" placeholder="Search" />
-                        <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
+                
             </div>
         </div>
     </nav>
