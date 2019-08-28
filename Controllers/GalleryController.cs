@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using F1News.Data;
@@ -18,6 +19,7 @@ namespace F1News.Controllers
         const string BLOB_CONTAINER_NAME = "memes";
         static CloudBlobContainer blobContainer;
         private ApplicationDbContext _context;
+        public List<GalleryImage> GalleryImages { get; set; }
         public IConfiguration _configuration;
         [BindProperty]
         public GalleryImage GalleryImage { get; set; }
@@ -25,6 +27,11 @@ namespace F1News.Controllers
         {
             _context = context;
             _configuration = configuration;
+        }
+        public async Task OnGet()
+        {
+            ViewData["SuccessMessage"] = TempData["SuccessMessage"];
+            GalleryImages = await _context.GalleryImages.ToListAsync();
         }
         public async Task OnGetAsync()
         {
@@ -56,7 +63,11 @@ namespace F1News.Controllers
                 return RedirectToPage("Error");
             }
         }
-        public IActionResult Index()
+        public IActionResult UploadPhoto()
+        {
+            return View();
+        }
+        public IActionResult ImageGallery()
         {
             return View();
         }
