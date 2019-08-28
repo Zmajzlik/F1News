@@ -34,7 +34,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                        <h1>F1 News<small>Get the latest News</small></h1>
+                        <a asp-action="Index" asp-controller="Home">
+                            <h1>F1 News<small>Get the latest News</small></h1>
+                        </a> 
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
