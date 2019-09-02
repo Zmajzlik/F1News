@@ -14,5 +14,6 @@ namespace F1News.Data
         {
         }
         public DbSet<GalleryImage> GalleryImages { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
     }
 }

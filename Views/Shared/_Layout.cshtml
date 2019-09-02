@@ -89,25 +89,25 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Formula 1</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Klasyfikacje</a>
-                            <a class="dropdown-item" href="#">Punkty karne</a>
-                            <a class="dropdown-item" href="#">Wykorzystanie jednostek</a>
+                            <a asp-action="Index" asp-controller="FormulaOne" class="dropdown-item" >Klasyfikacje</a>
+                            <a asp-action="Points" asp-controller="FormulaOne" class="dropdown-item" >Punkty karne</a>
+                            <a asp-action="Engines" asp-controller="FormulaOne" class="dropdown-item" >Wykorzystanie jednostek</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Inne Serie</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">W SERIES</a>
-                            <a class="dropdown-item" href="#">FORMULA 2</a>
-                            <a class="dropdown-item" href="#">FORMULA 3</a>
+                            <a asp-action="WSeries" asp-controller="Series" class="dropdown-item" >W SERIES</a>
+                            <a asp-action="FormulaTwo" asp-controller="Series" class="dropdown-item" >FORMULA 2</a>
+                            <a asp-action="FormulaThree" asp-controller="Series" class="dropdown-item" >FORMULA 3</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Ogladaj</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Gdzie ogladac F1</a>
-                            <a class="dropdown-item" href="#">Mini Drivers</a>
-                            <a class="dropdown-item" href="#">Vlogi</a>
+                            <a asp-action="Index" asp-controller="Watch" class="dropdown-item" >Gdzie ogladac F1</a>
+                            <a asp-action="MiniDrivers" asp-controller="Watch" class="dropdown-item" >Mini Drivers</a>
+                            <a asp-action="Vlogs" asp-controller="Watch" class="dropdown-item" >Vlogi</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
