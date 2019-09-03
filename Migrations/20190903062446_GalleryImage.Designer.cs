@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace F1News.Data.Migrations
+namespace F1News.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190825133823_PhotoGallery")]
-    partial class PhotoGallery
+    [Migration("20190903062446_GalleryImage")]
+    partial class GalleryImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,11 +21,30 @@ namespace F1News.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("F1News.Models.Driver", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Team");
+
+                    b.Property<string>("fullName");
+
+                    b.Property<int>("points");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Drivers");
+                });
+
             modelBuilder.Entity("F1News.Models.GalleryImage", b =>
                 {
                     b.Property<int>("photoID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Caption");
 
                     b.Property<bool>("IsMeme");
 
