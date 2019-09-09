@@ -26,7 +26,11 @@
                     <div id="Date"></div>
                 </div>
                 <div class="col-lg-3 offset-lg-5">
-                    <div class="social-icon"> <a target="_blank" href="#" class=" fa fa-facebook"></a> <a target="_blank" href="#" class=" fa fa-twitter"></a> <a target="_blank" href="#" class=" fa fa-google-plus"></a> <a target="_blank" href="#" class=" fa fa-linkedin"></a> <a target="_blank" href="#" class=" fa fa-youtube"></a> <a target="_blank" href="#" class=" fa fa-vimeo-square"></a> </div>
+                    <div class="social-icon">
+                        <a target="_blank" href="https://www.facebook.com/powrotrobertablogspotcom" class=" fa fa-facebook"></a>
+                        <a target="_blank" href="https://twitter.com/powrotroberta" class=" fa fa-twitter"></a>
+                        <a target="_blank" href="https://www.youtube.com/user/donmateo21" class=" fa fa-youtube"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,17 +45,20 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <div class="col-md-6 col-lg-5 offset-lg-3 admin-bar hidden-sm-down dropdown">
-                            <nav data-toggle="dropdown" class="nav nav-inline"> <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a> <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a> <a href="#" class="nav-link">@UserManager.GetUserName(User)</a> </nav>
+                            <nav class="nav nav-inline" data-toggle="dropdown">
+                            <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a> 
+                            <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a> 
+                            <a href="#" class="nav-link">@UserManager.GetUserName(User)</a> 
+                            </nav>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="nav-link btn btn-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Account</a>
+                                    <a class="form-inline nav-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Account</a>
                                 </li>
                                 <li>
-                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                                          asp-route-returnUrl="@Url.Page("/", new { area = "" })"
-                                          method="post">
-                                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"method="post">
+                                        <button type="submit" class="nav-link">Logout</button>
                                     </form>
+
                                 </li>
                             </ul>
                         </div>
@@ -71,43 +78,47 @@
                                 </ul>
                             </nav>
                         </div>
-                            
+
                     }
 
                 </div>
             </div>
         </div>
-       
+
     </header>
     <nav class="navbar top-nav">
         <div class="container">
             <button class="navbar-toggler hidden-lg-up " type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation"> &#9776; </button>
             <div class="collapse navbar-toggleable-md" id="exCollapsingNavbar2">
                 <ul class="nav navbar-nav ">
-                    <li class="nav-item active"> <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" asp-action="Biography" asp-controller="Home">Robert Kubica</a> </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Biography" asp-controller="Home">Robert Kubica</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Formula 1</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="Index" asp-controller="FormulaOne" class="dropdown-item" >Klasyfikacje</a>
-                            <a asp-action="Points" asp-controller="FormulaOne" class="dropdown-item" >Punkty karne</a>
-                            <a asp-action="Engines" asp-controller="FormulaOne" class="dropdown-item" >Wykorzystanie jednostek</a>
+                            <a asp-action="Index" asp-controller="FormulaOne" class="dropdown-item">Klasyfikacje</a>
+                            <a asp-action="Points" asp-controller="FormulaOne" class="dropdown-item">Punkty karne</a>
+                            <a asp-action="Engines" asp-controller="FormulaOne" class="dropdown-item">Wykorzystanie jednostek</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Inne Serie</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="WSeries" asp-controller="Series" class="dropdown-item" >W SERIES</a>
-                            <a asp-action="FormulaTwo" asp-controller="Series" class="dropdown-item" >FORMULA 2</a>
-                            <a asp-action="FormulaThree" asp-controller="Series" class="dropdown-item" >FORMULA 3</a>
+                            <a asp-action="WSeries" asp-controller="Series" class="dropdown-item">W SERIES</a>
+                            <a asp-action="FormulaTwo" asp-controller="Series" class="dropdown-item">FORMULA 2</a>
+                            <a asp-action="FormulaThree" asp-controller="Series" class="dropdown-item">FORMULA 3</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Ogladaj</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="Index" asp-controller="Watch" class="dropdown-item" >Gdzie ogladac F1</a>
-                            <a asp-action="MiniDrivers" asp-controller="Watch" class="dropdown-item" >Mini Drivers</a>
-                            <a asp-action="Vlogs" asp-controller="Watch" class="dropdown-item" >Vlogi</a>
+                            <a asp-action="Index" asp-controller="Watch" class="dropdown-item">Gdzie ogladac F1</a>
+                            <a asp-action="MiniDrivers" asp-controller="Watch" class="dropdown-item">Mini Drivers</a>
+                            <a asp-action="Vlogs" asp-controller="Watch" class="dropdown-item">Vlogi</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -121,12 +132,12 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Galeria</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="Index" asp-controller="Gallery" class="dropdown-item" >Wasze zdjecia</a>
+                            <a asp-action="Index" asp-controller="Gallery" class="dropdown-item">Wasze zdjecia</a>
                             <a class="dropdown-item" href="#">Sekcja memow</a>
                         </div>
                     </li>
                 </ul>
-                
+
             </div>
         </div>
     </nav>

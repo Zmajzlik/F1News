@@ -33,16 +33,13 @@ namespace F1News.Controllers
         // GET: Post
         public ActionResult Index()
         {
-
             var displayPostViewModels = _context.GalleryImages.Select(n => new DisplayPostViewModel
             {
                 Caption = n.Caption,
                 URL = n.URL.Split(',', StringSplitOptions.None).ToList()
             });
-
             return View(displayPostViewModels);
         }
-
         // GET: Post/Create
         public ActionResult Create()
         {
@@ -89,7 +86,7 @@ namespace F1News.Controllers
                     }
 
                     return RedirectToAction(nameof(Index));
-                   
+
                 }
 
                 return View(addPhotoViewModel);
