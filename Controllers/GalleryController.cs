@@ -20,25 +20,24 @@ namespace F1News.Controllers
     public class GalleryController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public GalleryController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-        public static List<GalleryImage> PublishedPhotos { get; set; } = new List<GalleryImage>();
 
         private readonly IHostingEnvironment _env;
 
-        public GalleryController(IHostingEnvironment env)
+        public GalleryController(ApplicationDbContext context, IHostingEnvironment env)
         {
+            _context = context;
             _env = env;
         }
+        public static List<GalleryImage> PublishedPhotos { get; set; } = new List<GalleryImage>();
 
         // GET: Post
         public ActionResult Index()
         {
+
             var displayPostViewModels = _context.GalleryImages.Select(n => new DisplayPostViewModel
             {
                 Caption = n.Caption,
+                URL = n.URL.Split(',', StringSplitOptions.None).ToList()
             });
 
             return View(displayPostViewModels);
@@ -53,7 +52,7 @@ namespace F1News.Controllers
         // POST: Post/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadPhoto(AddPhotoViewModel addPhotoViewModel)
+        public ActionResult Create(AddPhotoViewModel addPhotoViewModel)
         {
             try
             {
@@ -82,7 +81,7 @@ namespace F1News.Controllers
                         {
                             Caption = addPhotoViewModel.Caption,
                             URL = String.Join(",", photoList),
-                            
+                            IsMeme = false
                         });
 
                         var count = context.SaveChanges();
