@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using F1News.Data;
 using F1News.Models;
+using F1News.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,61 +19,87 @@ namespace F1News.Controllers
 {
     public class GalleryController : Controller
     {
-        static CloudBlobClient blobClient;
-        const string BLOB_CONTAINER_NAME = "memes";
-        static CloudBlobContainer blobContainer;
-        private ApplicationDbContext _context;
-        public List<GalleryImage> GalleryImages { get; set; }
-        public IConfiguration _configuration;
-        [BindProperty]
-        public GalleryImage GalleryImage { get; set; }
-        public GalleryController(IConfiguration configuration, ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public GalleryController(ApplicationDbContext context)
         {
             _context = context;
-            _configuration = configuration;
         }
-        public async Task OnGet()
+        public static List<GalleryImage> PublishedPhotos { get; set; } = new List<GalleryImage>();
+
+        private readonly IHostingEnvironment _env;
+
+        public GalleryController(IHostingEnvironment env)
         {
-            ViewData["SuccessMessage"] = TempData["SuccessMessage"];
-            GalleryImages = await _context.GalleryImages.ToListAsync();
+            _env = env;
         }
-        public async Task OnGetAsync()
+
+        // GET: Post
+        public ActionResult Index()
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_configuration.GetConnectionString("AzureStorageConnectionString"));
-            blobClient = storageAccount.CreateCloudBlobClient();
+            var displayPostViewModels = _context.GalleryImages.Select(n => new DisplayPostViewModel
+            {
+                Caption = n.Caption,
+            });
 
-            blobContainer = blobClient.GetContainerReference(BLOB_CONTAINER_NAME);
-
-            await blobContainer.CreateIfNotExistsAsync();
-
-            await blobContainer.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+            return View(displayPostViewModels);
         }
-        public async Task<IActionResult> OnPost(IFormCollection form)
+
+        // GET: Post/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Post/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadPhoto(AddPhotoViewModel addPhotoViewModel)
         {
             try
             {
-                var file = form.Files.FirstOrDefault();
-                CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file?.FileName);
-                blob.Properties.ContentType = file?.ContentType;
-                await blob.UploadFromStreamAsync(file?.OpenReadStream());
-                GalleryImage.URL = $"{blobContainer.StorageUri.PrimaryUri}/{file?.FileName}";
-                _context.GalleryImages.Add(GalleryImage);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Image upload success!";
-                return RedirectToPage("ImageGallery");
+                if (ModelState.IsValid)
+                {
+
+                    var photoList = new List<string>();
+                    foreach (var photo in addPhotoViewModel.Photo)
+                    {
+                        var uploadFolder = "Upload";
+
+                        var savePhotoPath = Path.Combine(_env.WebRootPath,
+                            uploadFolder, photo.FileName);
+
+                        using (var photoSave = new FileStream(savePhotoPath, FileMode.Create))
+                        {
+                            photo.CopyTo(photoSave);
+                        }
+
+                        photoList.Add("/" + uploadFolder + "/" + photo.FileName);
+                    }
+
+                    using (var context = new ApplicationDbContext())
+                    {
+                        context.GalleryImages.Add(new GalleryImage
+                        {
+                            Caption = addPhotoViewModel.Caption,
+                            URL = String.Join(",", photoList),
+                            
+                        });
+
+                        var count = context.SaveChanges();
+
+                    }
+
+                    return RedirectToAction(nameof(Index));
+                   
+                }
+
+                return View(addPhotoViewModel);
             }
-            catch (Exception ex)
+            catch
+
             {
-                return RedirectToPage("Error");
+                return View();
             }
-        }
-        public IActionResult UploadPhoto()
-        {
-            return View();
-        }
-        public IActionResult ImageGallery()
-        {
-            return View();
         }
     }
 }

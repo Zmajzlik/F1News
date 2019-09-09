@@ -9,11 +9,16 @@ namespace F1News.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
         public DbSet<GalleryImage> GalleryImages { get; set; }
         public DbSet<Driver> Drivers { get; set; }
+       
     }
 }

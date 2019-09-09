@@ -9,9 +9,13 @@ namespace F1News.Models
     public class GalleryImage
     {
         [Key]
-        public int photoID { get; set; }
+        public Guid photoID { get; set; }
         public string Caption { get; set; }
         public string URL { get; set; }
         public bool IsMeme { get; set; }
+        public GalleryImage()
+        {
+            photoID = new Guid();
+        }
     }
 }
