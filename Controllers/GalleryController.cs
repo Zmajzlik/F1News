@@ -41,6 +41,16 @@ namespace F1News.Controllers
             });
             return View(displayPostViewModels);
         }
+        public ActionResult MemeSection()
+        {
+            var displayMemeViewModels = _context.GalleryImages.Select(n => new DisplayMemeViewModel
+            {
+                Caption = n.Caption,
+                URL = n.URL.Split(',', StringSplitOptions.None).ToList(),
+                IsMeme = true
+            });
+            return View(displayMemeViewModels);
+        } 
         // GET: Post/Create
         public ActionResult Create()
         {
@@ -70,7 +80,7 @@ namespace F1News.Controllers
 
                         photoList.Add("/" + uploadFolder + "/" + photo.FileName);
                     }
-                    x
+                    
                     Debug.WriteLine("2");
                     Debug.WriteLine(addPostViewModel.Caption);
                     Debug.WriteLine(String.Join(",", photoList));
