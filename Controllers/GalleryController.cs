@@ -30,7 +30,7 @@ namespace F1News.Controllers
         }
         public static List<GalleryImage> PublishedPhotos { get; set; } = new List<GalleryImage>();
 
-        // GET: Post
+        // GET: Post    
         public ActionResult Index()
         {
             var displayPostViewModels = _context.GalleryImages.Select(n => new DisplayPostViewModel
