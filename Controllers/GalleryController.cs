@@ -43,13 +43,12 @@ namespace F1News.Controllers
         }
         public ActionResult MemeSection()
         {
-            var displayMemeViewModels = _context.GalleryImages.Select(n => new DisplayMemeViewModel
+            var displayPostViewModels = _context.GalleryImages.Select(n => new DisplayPostViewModel
             {
                 Caption = n.Caption,
-                URL = n.URL.Split(',', StringSplitOptions.None).ToList(),
-                IsMeme = true
+                URL = n.URL.Split(',', StringSplitOptions.None).ToList()
             });
-            return View(displayMemeViewModels);
+            return View(displayPostViewModels);
         } 
         // GET: Post/Create
         public ActionResult Create()

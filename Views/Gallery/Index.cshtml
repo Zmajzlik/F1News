@@ -6,12 +6,12 @@
 <p>
     <a class="btn-secondary" asp-action="Create">Add new post</a>
 </p>
-<div class="col-md-4">
+<div class="col">
     <div class="row">
         @foreach (var post in Model)
         {
             <h3>@post.Caption</h3>
-             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
 
                     @{int i = 0;}
@@ -24,7 +24,7 @@
                         </div>
                     }
                 </div>
-                
+
             </div>
         }
     </div>

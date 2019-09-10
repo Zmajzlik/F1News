@@ -12,5 +12,13 @@ namespace F1News.Controllers
         {
             return View();
         }
+        public IActionResult Fantasy()
+        {
+            return View();
+        }
+        public IActionResult Predictor()
+        {
+            return View();
+        }
     }
 }
