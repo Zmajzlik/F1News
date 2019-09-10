@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace F1News.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190903061303_initial")]
-    partial class initial
+    [Migration("20190910155041_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,10 @@ namespace F1News.Migrations
 
             modelBuilder.Entity("F1News.Models.GalleryImage", b =>
                 {
-                    b.Property<int>("photoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("photoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Caption");
 
                     b.Property<bool>("IsMeme");
 

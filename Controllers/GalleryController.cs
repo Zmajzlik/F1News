@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -49,21 +50,19 @@ namespace F1News.Controllers
         // POST: Post/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AddPhotoViewModel addPhotoViewModel)
+        public ActionResult Create(AddPhotoViewModel addPostViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-
+                    Debug.WriteLine("1");
                     var photoList = new List<string>();
-                    foreach (var photo in addPhotoViewModel.Photo)
+                    foreach (var photo in addPostViewModel.Photo)
                     {
                         var uploadFolder = "Upload";
-
                         var savePhotoPath = Path.Combine(_env.WebRootPath,
                             uploadFolder, photo.FileName);
-
                         using (var photoSave = new FileStream(savePhotoPath, FileMode.Create))
                         {
                             photo.CopyTo(photoSave);
@@ -71,25 +70,22 @@ namespace F1News.Controllers
 
                         photoList.Add("/" + uploadFolder + "/" + photo.FileName);
                     }
-
-                    using (var context = new ApplicationDbContext())
+                    x
+                    Debug.WriteLine("2");
+                    Debug.WriteLine(addPostViewModel.Caption);
+                    Debug.WriteLine(String.Join(",", photoList));
+                    _context.GalleryImages.Add(new GalleryImage
                     {
-                        context.GalleryImages.Add(new GalleryImage
-                        {
-                            Caption = addPhotoViewModel.Caption,
-                            URL = String.Join(",", photoList),
-                            IsMeme = false
-                        });
-
-                        var count = context.SaveChanges();
-
-                    }
-
+                        Caption = addPostViewModel.Caption,
+                        URL = String.Join(",", photoList),
+                        IsMeme = false
+                    }); ;
+                    var count = _context.SaveChanges();
+                    Debug.WriteLine("3");
                     return RedirectToAction(nameof(Index));
-
                 }
 
-                return View(addPhotoViewModel);
+                return View();
             }
             catch
 

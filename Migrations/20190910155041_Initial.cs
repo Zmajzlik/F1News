@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace F1News.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,8 +66,8 @@ namespace F1News.Migrations
                 name: "GalleryImages",
                 columns: table => new
                 {
-                    photoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    photoID = table.Column<Guid>(nullable: false),
+                    Caption = table.Column<string>(nullable: true),
                     URL = table.Column<string>(nullable: true),
                     IsMeme = table.Column<bool>(nullable: false)
                 },

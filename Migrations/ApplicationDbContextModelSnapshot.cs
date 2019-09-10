@@ -38,9 +38,8 @@ namespace F1News.Migrations
 
             modelBuilder.Entity("F1News.Models.GalleryImage", b =>
                 {
-                    b.Property<int>("photoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("photoID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Caption");
 
