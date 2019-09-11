@@ -6,60 +6,34 @@ using F1News.Data;
 using F1News.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Dynamic;
+using Microsoft.AspNetCore.Hosting;
+using F1News.ViewModels;
 
 namespace F1News.Controllers
 {
     public class FormulaOneController : Controller
     {
-        private ApplicationDbContext _context;
-        public FormulaOneController(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+
+        private readonly IHostingEnvironment _env;
+        public FormulaOneController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
-        public IActionResult LoadData()
-        {
-            try
-            {
-                var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-                var start = Request.Form["start"].FirstOrDefault();
-               
-                var length = Request.Form["length"].FirstOrDefault();
-                 
-                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-                 
-                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-             
-                var searchValue = Request.Form["search[value]"].FirstOrDefault();
- 
-                int pageSize = length != null ? Convert.ToInt32(length) : 0;
-                int skip = start != null ? Convert.ToInt32(start) : 0;
-                int recordsTotal = 0;
-                var customerData = (from tempcustomer in _context.Drivers
-                                    select tempcustomer);
-                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
-                {
-                    customerData = customerData.OrderBy(sortColumn + " " + sortColumnDirection);
-                }
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    customerData = customerData.Where(m => m.fullName == searchValue);
-                } 
-                recordsTotal = customerData.Count();
-              
-                var data = customerData.Skip(skip).Take(pageSize).ToList();
- 
-                return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+        public static List<Driver> DriversClassification { get; set; } = new List<Driver>();
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
+            var displayDrivers = _context.Drivers.Select(n => new DriversViewModel
+            {
+                driverName = n.fullName,
+                driverTeam = n.Team,
+                driverCountry = n.Country,
+                driverPoints = n.points.ToString()
+                
+            });
+            return View(displayDrivers);
         }
         public IActionResult Points()
         {

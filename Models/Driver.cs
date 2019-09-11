@@ -11,5 +11,6 @@ namespace F1News.Models
         public string fullName { get; set; }
         public int points { get; set; }
         public string Team { get; set; }
+        public string Country { get; set; }
     }
 }
